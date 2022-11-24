@@ -1,4 +1,4 @@
-import { BeforeAll, AfterAll, Before, ITestCaseHookParameter } from "@cucumber/cucumber";
+import { BeforeAll, AfterAll, Before, ITestCaseHookParameter, setDefaultTimeout } from "@cucumber/cucumber";
 import { chromium, ChromiumBrowser, ConsoleMessage } from "@playwright/test";
 import { config } from "./config";
 import { ICustomWorld } from "./custom-world";
@@ -9,8 +9,14 @@ declare global {
     var browser: ChromiumBrowser
 }
 
+setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
+
 BeforeAll(async function () {
     browser = await chromium.launch(config.browserOptions);
+});
+
+Before({ tags: '@debug' }, async function (this: ICustomWorld) {
+    this.debug = true;
 });
 
 Before(async function (this: ICustomWorld, { pickle }: ITestCaseHookParameter) {

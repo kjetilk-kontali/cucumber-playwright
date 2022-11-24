@@ -3,9 +3,11 @@ import { expect } from '@playwright/test';
 import { config } from '../support/config';
 import { ICustomWorld } from '../support/custom-world';
 
+
 Given("a user wants to request a trial on Edge", async function (this: ICustomWorld) {
-    await this.page?.goto(config.BASE_URL);
-    await this.page?.getByRole('heading', { name: 'Start your 30-day free trial' }).click();
+    const page = this.page!;    
+    await page.goto(config.BASE_URL);
+    await page.getByRole('heading', { name: 'Start your 30-day free trial' }).click();
 
 });
 
