@@ -19,6 +19,9 @@ jobs:
         node-version: [16.x, 18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
+    env:
+      CUCUMBER_PUBLISH_TOKEN: 552dddc8-c79c-4e31-9306-ca16e23dd8de
+
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -29,4 +32,4 @@ jobs:
     - run: npm ci
     - run: npx playwright install
     - run: npm run build --if-present
-    - run: npm test
+    - run: npm test-ci

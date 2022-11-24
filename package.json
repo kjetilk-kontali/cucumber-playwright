@@ -1,7 +1,8 @@
 {
   "name": "play-cu",
   "scripts": {
-    "test": "cucumber-js"
+    "test": "cucumber-js",
+    "test-ci": "cucumber-js --publish"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^8.8.0",
